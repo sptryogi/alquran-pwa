@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+python-multipart
+pillow
+pandas
+pytesseract
+rapidfuzz
+python-dotenv
+openai>=1.0.0
+opencv-python
+faster-whisper
+torch
+torchaudio
+numba
+gTTS

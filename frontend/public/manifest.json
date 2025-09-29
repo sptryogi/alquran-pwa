@@ -1,0 +1,12 @@
+{
+  "short_name": "QuranApp",
+  "name": "Belajar Al-Qur'an Interaktif",
+  "icons": [
+    { "src": "/icon/logo192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon/logo512.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#2e7d32",
+  "background_color": "#ffffff"
+}
