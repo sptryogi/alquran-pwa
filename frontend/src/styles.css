@@ -109,6 +109,7 @@ body {
   cursor: pointer;
   font-size: 14px;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 
 .profile-btn {
@@ -127,6 +128,16 @@ body {
 
 .logout-btn:hover {
   background-color: #c0392b;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 600px) {
+  .header-buttons {
+    top: 8px;
+    right: 8px;
+    flex-direction: column; /* tombol jadi bertumpuk di HP */
+    gap: 6px;
+  }
 }
 
 /* Profile Page */
