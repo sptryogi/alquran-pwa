@@ -102,7 +102,7 @@ body {
 
 /* Tombol kanan atas mandiri */
 .top-right-buttons {
-  position: fixed;   /* selalu di pojok layar */
+  position: absolute;   /* selalu di pojok layar */
   top: 12px;
   right: 12px;
   display: flex;
