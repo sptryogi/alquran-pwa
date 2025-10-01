@@ -12,20 +12,20 @@ export default function Home() {
   return (
     <div className="container">
       {/* Header dengan tombol di kanan atas */}
+      {/* Tombol kanan atas */}
+      <div className="top-right-buttons">
+        <button className="profile-btn" onClick={() => nav("/profile")}>
+          Profile
+        </button>
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
       <div className="header">
         <h1>📖 Belajar Qur'an Interaktif</h1>
         <p>
           Latihan mandiri: menulis & membaca Al-Qur'an dengan validasi otomatis
         </p>
-        {/* Tombol kanan atas */}
-        <div className="header-buttons">
-          <button className="profile-btn" onClick={() => nav("/profile")}>
-            Profile
-          </button>
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
       </div>
 
       <div className="card">
