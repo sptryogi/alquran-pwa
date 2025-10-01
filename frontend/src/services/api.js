@@ -1,5 +1,5 @@
 // const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
-const API = "https://alquran-backend-jsscmo6pma-et.a.run.app"
+const API = "https://alquran-backend-941267709419.asia-southeast2.run.app"
 
 /** Upload image file to backend */
 export async function uploadImage(file) {
