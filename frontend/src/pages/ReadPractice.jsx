@@ -21,7 +21,7 @@ export default function ReadPractice() {
     <div className="readpractice-container">
       {/* Tombol kembali */}
       <button className="back-btn" onClick={() => nav("/")}>
-        ⬅ Kembali
+        ⬅️ Kembali ke Home
       </button>
 
       <div className="readpractice-card">
