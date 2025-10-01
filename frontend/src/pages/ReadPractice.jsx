@@ -20,9 +20,14 @@ export default function ReadPractice() {
   return (
     <div className="readpractice-container">
       {/* Tombol kembali */}
-      <button className="back-btn" onClick={() => nav("/")}>
+      {/* <button className="back-btn" onClick={() => nav("/")}>
         ⬅️ Kembali ke Home
-      </button>
+      </button> */}
+      <div className="wp-topbar">
+        <button className="wp-back-btn" onClick={() => nav("/")}>
+          ⬅️ Kembali ke Home
+        </button>
+      </div>
 
       <div className="readpractice-card">
         <h3>Latihan Membaca (Tilawah)</h3>
