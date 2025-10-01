@@ -17,6 +17,7 @@ export default function Home() {
         <p>
           Latihan mandiri: menulis & membaca Al-Qur'an dengan validasi otomatis
         </p>
+        {/* Tombol kanan atas */}
         <div className="header-buttons">
           <button className="profile-btn" onClick={() => nav("/profile")}>
             Profile
