@@ -100,6 +100,16 @@ body {
   background: #0056b3;
 }
 
+/* Tombol kanan atas mandiri */
+.top-right-buttons {
+  position: fixed;   /* selalu di pojok layar */
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 1000;     /* biar di atas elemen lain */
+}
+
 /* Logout btn in home */
 .profile-btn,
 .logout-btn {
