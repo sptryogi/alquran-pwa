@@ -51,7 +51,7 @@ export default function ResultCard({ result }) {
           style={{ marginTop: "10px" }}
         >
           <source
-            src={`http://localhost:8000/feedback-tts?feedback=${encodeURIComponent(result.feedback)}`}
+            src={`https://alquran-backend-941267709419.asia-southeast2.run.app/feedback-tts?feedback=${encodeURIComponent(result.feedback)}`}
             type="audio/mpeg"
           />
           Browser kamu tidak mendukung audio.
