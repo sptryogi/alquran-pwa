@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Book() {
+  const nav = useNavigate();
   const [activeTab, setActiveTab] = useState("buku");
 
   const chapters = [
@@ -17,10 +18,10 @@ export default function Book() {
         </button>
       </div>
       
-      <h2>📚 Buku & Animasi</h2>
+      <h2 style={{ textAlign: "center", margin: "20px 0" }}>📚 Buku & Animasi</h2>
       
       {/* Tab Switcher */}
-      <div className="tab-buttons">
+      <div className="tab-buttons" style={{ textAlign: "center", marginBottom: "20px" }}>
         <button onClick={() => setActiveTab("buku")} className={activeTab==="buku" ? "active" : ""}>Buku</button>
         <button onClick={() => setActiveTab("animasi")} className={activeTab==="animasi" ? "active" : ""}>Animasi</button>
       </div>
