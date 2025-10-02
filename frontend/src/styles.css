@@ -489,13 +489,14 @@ body {
   margin: 20px 0;
 }
 .tab-buttons button {
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  margin: 0 5px;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
-  background: #ddd;
 }
-.tab-buttons button.active {
+
+.tab-buttons .active {
   background: #3498db;
   color: white;
 }
