@@ -481,3 +481,29 @@ body {
   color: #555;
   font-style: italic;
 }
+
+/* book */
+.tab-buttons {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+.tab-buttons button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #ddd;
+}
+.tab-buttons button.active {
+  background: #3498db;
+  color: white;
+}
+.chapter-card {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
