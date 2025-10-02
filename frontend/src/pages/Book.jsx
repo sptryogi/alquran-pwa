@@ -10,6 +10,12 @@ export default function Book() {
 
   return (
     <div className="container">
+      <div className="wp-topbar">
+        <button className="wp-back-btn" onClick={() => nav("/")}>
+          ⬅️ Kembali ke Home
+        </button>
+      </div>
+      
       <h2>📚 Buku & Animasi</h2>
       
       {/* Tab Switcher */}
