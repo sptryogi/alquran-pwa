@@ -49,11 +49,18 @@ export default function Home() {
           <p>Rekam bacaan ayat, sistem akan menilai pelafalan.</p>
         </div>
 
-        <div
+        <div className="feature" onClick={() => nav("/book")}>
+          <div>📚</div>
+          <h4>Buku & Animasi</h4>
+          <p>Baca teori dan lihat animasi belajar per bab.</p>
+        </div>
+
+        {/* <div
           className="feature"
           style={{ gridColumn: "1 / -1" }}
           onClick={() => nav("/progress")}
-        >
+        > */}
+        <div className="feature" onClick={() => nav("/progress")}>
           <h4>📊 Progress Saya</h4>
           <p>Lihat perkembangan latihan menulis & membaca.</p>
         </div>
