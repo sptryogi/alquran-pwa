@@ -50,7 +50,8 @@ export default function Ask() {
       {answer && (
         <div className="answer-box">
           <h4>Jawaban:</h4>
-          <p>{answer}</p>
+          <p dangerouslySetInnerHTML={{ __html: answer.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") }}></p>
+          {/* <p>{answer}</p> */}
         </div>
       )}
     </div>
