@@ -7,6 +7,7 @@ import ReadPractice from "./pages/ReadPractice";
 import ProgressPage from "./pages/ProgressPage";
 import ProfileUser from "./pages/ProfileUser";
 import Book from "./pages/Book";   // pastikan ini
+import Ask from "./pages/Ask";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/progress" element={<ProgressPage />} />
       <Route path="/profile" element={<ProfileUser />} />
       <Route path="/book" element={<Book />} />  {/* tambahkan ini */}
+      <Route path="/ask" element={<Ask />} />
       </Routes>
     </Router>
   );
