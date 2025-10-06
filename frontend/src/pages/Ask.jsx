@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Ask() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
+  const nav = useNavigate();
 
   const handleAsk = async () => {
     if (!question.trim()) return;
@@ -23,6 +25,12 @@ export default function Ask() {
 
   return (
     <div className="container">
+      <div className="wp-topbar">
+        <button className="wp-back-btn" onClick={() => nav("/")}>
+          ⬅️ Kembali ke Home
+        </button>
+      </div>
+      
       <h2>💬 Bertanya</h2>
       <p>
         Tanyakan apa saja seputar huruf hijaiyah, cara membaca, atau makna ayat
