@@ -546,6 +546,8 @@ button:hover {
     position: relative;
     width: 100%;
     /* Atur rasio aspek jika perlu, atau biarkan video mengatur ukurannya */
+    border-radius: 8px; /* Pastikan container juga rounded */
+    overflow: hidden; /* Sembunyikan apa pun yang keluar dari border */
 }
 
 /* Video: tampilkan dalam ukuran penuh container */
@@ -581,3 +583,12 @@ button:hover {
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7); /* Efek mask: menggelapkan area di luar baris */
 }
 
+/* --- PENAMBAHAN STYLE UNTUK TOMBOL KAMERA --- */
+.wp-btn-group.camera-controls {
+    position: absolute; /* Posisikan di atas video */
+    bottom: 16px;       /* Jarak dari bawah */
+    left: 50%;          /* Pusatkan horizontal */
+    transform: translateX(-50%);
+    z-index: 100;       /* Pastikan di atas overlay */
+    margin-top: 0;      /* Hapus margin atas bawaan */
+}
