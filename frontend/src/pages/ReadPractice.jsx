@@ -8,6 +8,10 @@ export default function ReadPractice() {
   const nav = useNavigate();
   const [result, setResult] = useState(null);
 
+  const handleTryAgain = () => {
+    setResult(null); // Fungsi reset
+  };
+
   const handleResult = async (res) => {
     setResult(res);
     try {
@@ -36,8 +40,19 @@ export default function ReadPractice() {
         </p>
       </div>
 
-      <AudioRecorder onResult={handleResult} />
-      <ResultCard result={result} />
+      {!result && <AudioRecorder onResult={handleResult} />}
+      {/* Result Card dan Tombol Coba Lagi (Hanya tampil JIKA result ada) */}
+      {result && (
+        <>
+          <ResultCard result={result} />
+          <div className="readpractice-card"> 
+            {/* Menggunakan kelas btn yang sudah ada */}
+            <button className="btn primary" onClick={handleTryAgain}> 
+                🔁 Coba Lagi / Mulai Lagi
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
