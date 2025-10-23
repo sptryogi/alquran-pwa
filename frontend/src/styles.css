@@ -586,11 +586,9 @@ button:hover {
 /* --- PENAMBAHAN STYLE UNTUK TOMBOL KAMERA --- */
 .wp-btn-group.camera-controls {
   position: static; /* Posisikan di atas video */
-  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 15px;      /* Hapus margin atas bawaan */
   margin-top: 20px;
   margin-bottom: 20px;
 }
