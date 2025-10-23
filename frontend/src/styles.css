@@ -575,7 +575,7 @@ button:hover {
 /* Baris Panduan di tengah (untuk menandai area 1 larik) */
 .cropping-line {
     /* Tinggi sekitar 20% agar sesuai dengan logika cropping di JS */
-    height: 20%; 
+    height: 35%; 
     width: 90%; 
     margin: 0 auto;
     border: 3px dashed #FFF; /* Garis panduan putus-putus */
@@ -589,6 +589,9 @@ button:hover {
     bottom: 16px;       /* Jarak dari bawah */
     left: 50%;          /* Pusatkan horizontal */
     transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     z-index: 100;       /* Pastikan di atas overlay */
-    margin-top: 0;      /* Hapus margin atas bawaan */
+    margin-top: 15px;      /* Hapus margin atas bawaan */
 }
