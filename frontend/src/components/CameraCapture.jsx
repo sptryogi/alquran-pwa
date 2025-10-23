@@ -44,9 +44,8 @@ export default function CameraCapture({ onResult }) {
     const videoHeight = video.videoHeight;
 
     // === LOGIKA CROPPING BARU ===
-    // Crop area: kita ambil bagian tengah 20% dari tinggi video
-    const cropRatio = 0.2; 
-    const cropHeight = videoHeight * cropRatio;
+    const cropHeight = videoHeight * 0.35; // Ganti dari 0.20
+    const cropWidth = videoWidth * 0.90; // Ambil 90% lebar
     const cropY = (videoHeight - cropHeight) / 2; // Posisi Y di tengah
 
     // Set canvas ke ukuran area yang akan di-crop (lebar penuh, tinggi ter-crop)
