@@ -10,6 +10,11 @@ export default function WritePractice() {
   const [result, setResult] = useState(null);
   const [mode, setMode] = useState("upload");
 
+  // Fungsi untuk me-reset hasil dan kembali ke mode input
+  const handleTryAgain = () => {
+    setResult(null); 
+  };
+
   const handleResult = async (res) => {
     setResult(res);
     try {
@@ -40,13 +45,15 @@ export default function WritePractice() {
         <div className="wp-mode-selector">
           <button
             className={`wp-btn ${mode === "upload" ? "active" : ""}`}
-            onClick={() => setMode("upload")}
+            onClick={() => { setMode("upload"); handleTryAgain(); }}
+            disabled={!!result} // Disable saat hasil tampil
           >
             📁 Upload Gambar
           </button>
           <button
             className={`wp-btn ${mode === "camera" ? "active" : ""}`}
-            onClick={() => setMode("camera")}
+            onClick={() => { setMode("camera"); handleTryAgain(); }}
+            disabled={!!result} // Disable saat hasil tampil
           >
             📷 Kamera Realtime
           </button>
@@ -54,11 +61,21 @@ export default function WritePractice() {
       </div>
 
       {/* Input Components */}
-      {mode === "upload" && <ImageUpload onResult={handleResult} />}
-      {mode === "camera" && <CameraCapture onResult={handleResult} />}
+      {!result && mode === "upload" && <ImageUpload onResult={handleResult} />}
+      {!result && mode === "camera" && <CameraCapture onResult={handleResult} />}
 
       {/* Hasil */}
-      <ResultCard result={result} />
+      {/* Result Card dan Tombol Coba Lagi (Hanya tampil JIKA result ada) */}
+      {result && (
+        <>
+          <ResultCard result={result} />
+          <div className="wp-card"> 
+            <button className="wp-btn primary" onClick={handleTryAgain}>
+                🔁 Coba Lagi / Mulai Lagi
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
