@@ -107,7 +107,7 @@ export default function CameraCapture({ onResult }) {
       {/* END NEW */}
       <canvas ref={canvasRef} style={{ display: "none" }} />
 
-      <div className="wp-btn-group">
+      <div className="wp-btn-group camera-controls">
         <button className="wp-btn primary" onClick={capture} disabled={loading}>
           📸 Tangkap
         </button>
