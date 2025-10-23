@@ -543,55 +543,54 @@ button:hover {
 
 /* Container untuk video dan overlay */
 .camera-viewport-container {
-    position: relative;
-    width: 100%;
-    /* Atur rasio aspek jika perlu, atau biarkan video mengatur ukurannya */
-    border-radius: 8px; /* Pastikan container juga rounded */
-    overflow: hidden; /* Sembunyikan apa pun yang keluar dari border */
+  position: relative;
+  width: 100%;
+  /* Atur rasio aspek jika perlu, atau biarkan video mengatur ukurannya */
+  border-radius: 8px; /* Pastikan container juga rounded */
+  overflow: hidden; /* Sembunyikan apa pun yang keluar dari border */
 }
 
 /* Video: tampilkan dalam ukuran penuh container */
 .wp-video {
-    width: 100%;
-    height: auto; 
-    display: block;
-    /* Optional: tambahkan border-radius */
-    border-radius: 8px; 
+  width: 100%;
+  height: auto; 
+  display: block;
+  /* Optional: tambahkan border-radius */
+  border-radius: 8px; 
 }
 
 /* Overlay Panduan */
 .cropping-guide-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex; /* Untuk memposisikan baris di tengah */
-    flex-direction: column;
-    justify-content: center; /* Pusat vertikal */
-    pointer-events: none; /* Agar klik tetap bisa ke video/tombol di bawahnya */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Untuk memposisikan baris di tengah */
+  flex-direction: column;
+  justify-content: center; /* Pusat vertikal */
+  pointer-events: none; /* Agar klik tetap bisa ke video/tombol di bawahnya */
 }
 
 /* Baris Panduan di tengah (untuk menandai area 1 larik) */
 .cropping-line {
-    /* Tinggi sekitar 20% agar sesuai dengan logika cropping di JS */
-    height: 35%; 
-    width: 90%; 
-    margin: 0 auto;
-    border: 3px dashed #FFF; /* Garis panduan putus-putus */
-    background: rgba(0, 0, 0, 0.3); /* Sedikit gelap di luar area, tapi di sini hanya area baris yang disorot */
-    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7); /* Efek mask: menggelapkan area di luar baris */
+  /* Tinggi sekitar 20% agar sesuai dengan logika cropping di JS */
+  height: 35%; 
+  width: 90%; 
+  margin: 0 auto;
+  border: 3px dashed #FFF; /* Garis panduan putus-putus */
+  background: rgba(0, 0, 0, 0.3); /* Sedikit gelap di luar area, tapi di sini hanya area baris yang disorot */
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7); /* Efek mask: menggelapkan area di luar baris */
 }
 
 /* --- PENAMBAHAN STYLE UNTUK TOMBOL KAMERA --- */
 .wp-btn-group.camera-controls {
-    position: absolute; /* Posisikan di atas video */
-    bottom: 16px;       /* Jarak dari bawah */
-    left: 50%;          /* Pusatkan horizontal */
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    z-index: 100;       /* Pastikan di atas overlay */
-    margin-top: 15px;      /* Hapus margin atas bawaan */
+  position: static; /* Posisikan di atas video */
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;      /* Hapus margin atas bawaan */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
