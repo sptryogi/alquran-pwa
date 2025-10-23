@@ -39,10 +39,33 @@ export default function CameraCapture({ onResult }) {
     if (!videoRef.current) return;
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    // Dimensi asli video
+    const videoWidth = video.videoWidth;
+    const videoHeight = video.videoHeight;
+
+    // === LOGIKA CROPPING BARU ===
+    // Crop area: kita ambil bagian tengah 20% dari tinggi video
+    const cropRatio = 0.2; 
+    const cropHeight = videoHeight * cropRatio;
+    const cropY = (videoHeight - cropHeight) / 2; // Posisi Y di tengah
+
+    // Set canvas ke ukuran area yang akan di-crop (lebar penuh, tinggi ter-crop)
+    canvas.width = videoWidth;
+    canvas.height = cropHeight;
+
     const ctx = canvas.getContext("2d");
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    // Gambar hanya area yang di-crop dari video ke canvas
+    ctx.drawImage(
+      video,
+      0, // sx: mulai X sumber
+      cropY, // sy: mulai Y sumber (pusat vertikal)
+      videoWidth, // sWidth: lebar sumber
+      cropHeight, // sHeight: tinggi sumber
+      0, // dx: mulai X tujuan
+      0, // dy: mulai Y tujuan
+      videoWidth, // dWidth: lebar tujuan
+      cropHeight // dHeight: tinggi tujuan
+    );
 
     canvas.toBlob(async (blob) => {
       if (!blob) return;
@@ -67,13 +90,21 @@ export default function CameraCapture({ onResult }) {
   return (
     <div className="wp-card">
       <h4>📷 Kamera — Tangkap Tulisan</h4>
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        muted
-        className="wp-video"
-      />
+      {/* NEW: Container untuk overlay panduan */}
+      <div className="camera-viewport-container"> 
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          muted
+          className="wp-video"
+        />
+        {/* NEW: Overlay Panduan (akan diatur di CSS) */}
+        <div className="cropping-guide-overlay">
+          <div className="cropping-line"></div>
+        </div>
+      </div>
+      {/* END NEW */}
       <canvas ref={canvasRef} style={{ display: "none" }} />
 
       <div className="wp-btn-group">
