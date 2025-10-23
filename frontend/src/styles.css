@@ -539,3 +539,45 @@ button:hover {
   margin-top: 10px;
 }
 
+/* Styling untuk CameraCapture.jsx */
+
+/* Container untuk video dan overlay */
+.camera-viewport-container {
+    position: relative;
+    width: 100%;
+    /* Atur rasio aspek jika perlu, atau biarkan video mengatur ukurannya */
+}
+
+/* Video: tampilkan dalam ukuran penuh container */
+.wp-video {
+    width: 100%;
+    height: auto; 
+    display: block;
+    /* Optional: tambahkan border-radius */
+    border-radius: 8px; 
+}
+
+/* Overlay Panduan */
+.cropping-guide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex; /* Untuk memposisikan baris di tengah */
+    flex-direction: column;
+    justify-content: center; /* Pusat vertikal */
+    pointer-events: none; /* Agar klik tetap bisa ke video/tombol di bawahnya */
+}
+
+/* Baris Panduan di tengah (untuk menandai area 1 larik) */
+.cropping-line {
+    /* Tinggi sekitar 20% agar sesuai dengan logika cropping di JS */
+    height: 20%; 
+    width: 90%; 
+    margin: 0 auto;
+    border: 3px dashed #FFF; /* Garis panduan putus-putus */
+    background: rgba(0, 0, 0, 0.3); /* Sedikit gelap di luar area, tapi di sini hanya area baris yang disorot */
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7); /* Efek mask: menggelapkan area di luar baris */
+}
+
