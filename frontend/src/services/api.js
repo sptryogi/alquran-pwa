@@ -6,7 +6,7 @@ export async function uploadImage(file) {
   const fd = new FormData();
   fd.append("file", file);
   // target_text optionally can be passed via form; for MVP backend uses default target
-  const resp = await fetch(`${API}/scan-image`, {
+  const resp = await fetch(`${API}/scan-tulisan`, {
     method: "POST",
     body: fd
   });
