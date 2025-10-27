@@ -51,7 +51,6 @@ export async function saveProgress({ type, score }) {
 
 // Ambil progress user
 export async function getProgress(userId) {
-  // ambil semua progress milik user
   const { data, error } = await supabase
     .from("progress")
     .select("type, score")
@@ -65,7 +64,7 @@ export async function getProgress(userId) {
 
   // hitung rata-rata & jumlah
   let writeSum = 0, writeCount = 0, readSum = 0, readCount = 0;
-  data.forEach(item => {
+  for (const item of data) {
     if (item.type === "write") {
       writeSum += item.score;
       writeCount++;
@@ -73,7 +72,7 @@ export async function getProgress(userId) {
       readSum += item.score;
       readCount++;
     }
-  });
+  }
 
   return {
     write: writeCount ? writeSum / writeCount : 0,
