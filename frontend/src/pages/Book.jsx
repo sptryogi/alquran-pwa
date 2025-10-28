@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
 
-// ✅ agar PDF bisa dirender di browser (wajib)
+// wajib untuk worker pdf.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 export default function Book() {
   const nav = useNavigate();
@@ -44,7 +47,6 @@ export default function Book() {
       {activeTab === "buku" && (
         <div className="chapter-list">
           {!selectedChapter ? (
-            // 📖 Daftar Bab
             chapters.map(ch => (
               <div
                 key={ch.id}
@@ -57,7 +59,6 @@ export default function Book() {
               </div>
             ))
           ) : (
-            // 📄 Viewer PDF
             <div className="pdf-viewer" style={{ textAlign: "center" }}>
               <button
                 onClick={() => setSelectedChapter(null)}
@@ -78,7 +79,12 @@ export default function Book() {
                   onLoadSuccess={onDocumentLoadSuccess}
                   loading={<p>📥 Memuat buku...</p>}
                 >
-                  <Page pageNumber={pageNumber} renderTextLayer={false} renderAnnotationLayer={false} scale={1.2} />
+                  <Page
+                    pageNumber={pageNumber}
+                    renderTextLayer={false}
+                    renderAnnotationLayer={false}
+                    scale={1.2}
+                  />
                 </Document>
                 <p>
                   Halaman {pageNumber} dari {numPages || "?"}
