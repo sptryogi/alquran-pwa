@@ -48,7 +48,7 @@ export default function Book() {
             chapters.map(ch => (
               <div
                 key={ch.id}
-                className="chapter-card"
+                className="chapter-card-konten"
                 style={{ cursor: "pointer" }}
                 onClick={() => setSelectedChapter(ch)}
               >
@@ -97,7 +97,7 @@ export default function Book() {
       {activeTab === "animasi" && (
         <div className="chapter-list">
           {chapters.map(ch => (
-            <div key={ch.id} className="chapter-card">
+            <div key={ch.id} className="chapter-card-konten">
               <h3>{ch.title}</h3>
               <iframe
                 width="100%"
