@@ -596,3 +596,22 @@ button:hover {
   bottom: auto;
   left: auto;
 }
+
+/* ---- KONTEN BUKU ----*/
+.chapter-card-konten {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: transform 0.2s;
+}
+.chapter-card-konten:hover {
+  transform: scale(1.02);
+}
+
+.pdf-viewer canvas {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  margin: 10px auto;
+}
