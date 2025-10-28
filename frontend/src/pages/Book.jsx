@@ -13,37 +13,8 @@ export default function Book() {
   const [numPages, setNumPages] = useState(null);
 
   const chapters = [
-    {
-      id: 1,
-      title: "BAB 1: MENGENAL HURUF & BUNYI DASAR",
-      pdf: "/pdf/Konten_BBA1.pdf",
-      desc: "Huruf Arab disebut huruf Hijaiyah. Setiap huruf memiliki bentuk khas yang ketika
-            ditulis berdiri sendiri disebut isolat (terpisah). Nanti kita akan belajar bentuknya ketika disambung.",
-    },
-    {
-      id: 2,
-      title: "BAB 2: MENULIS KATA-KATA FAMILIAR",
-      pdf: "/pdf/Konten_BBA2.pdf",
-      desc: "Pahami Kata-Kata yang familiar dalam bahasa Arab khususnya di bacaan Al Quran.",
-    },
-    {
-      id: 3,
-      title: "BAB 3: MELANGKAH KE AYAT AL-QURAN",
-      pdf: "/pdf/Konten_BBA3.pdf",
-      desc: "Pelajari Ayat Al Quran dengan latihan membaca dan menulis.",
-    },
-    {
-      id: 4,
-      title: "BAB 4: MENGUASAI SELURUH HURUF",
-      pdf: "/pdf/Konten_BBA4.pdf",
-      desc: "Kuasi Seluruh Huruf yang ada agar makin mahir dalam membaca maupun menulis Al Quran.",
-    },
-    {
-      id: 1,
-      title: "BAB 5: HUKUM TAJWID DASAR",
-      pdf: "/pdf/Konten_BBA5.pdf",
-      desc: "Pelajari Tajwid dari Hukum Nun maupun Hukum Mim.",
-    },
+    { id: 1, title: "Bab 1: Huruf Hijaiyah", file: "/pdf/Konten_BBA1.pdf", video: "https://www.youtube.com/embed/VIDEO_ID1" },
+    { id: 2, title: "Bab 2: Harakat", file: "/pdf/Konten_BBA2.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
   ];
 
   const onDocumentLoadSuccess = ({ numPages }) => {
@@ -77,7 +48,7 @@ export default function Book() {
             chapters.map(ch => (
               <div
                 key={ch.id}
-                className="chapter-card-konten"
+                className="chapter-card"
                 style={{ cursor: "pointer" }}
                 onClick={() => setSelectedChapter(ch)}
               >
@@ -126,7 +97,7 @@ export default function Book() {
       {activeTab === "animasi" && (
         <div className="chapter-list">
           {chapters.map(ch => (
-            <div key={ch.id} className="chapter-card-konten">
+            <div key={ch.id} className="chapter-card">
               <h3>{ch.title}</h3>
               <iframe
                 width="100%"
@@ -144,4 +115,3 @@ export default function Book() {
     </div>
   );
 }
-
