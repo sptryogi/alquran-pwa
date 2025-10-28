@@ -12,15 +12,34 @@ export default function Book() {
   const chapters = [
     {
       id: 1,
-      title: "Bab 1: Huruf Hijaiyah",
+      title: "BAB 1: MENGENAL HURUF & BUNYI DASAR",
       pdf: "/pdf/Konten_BBA1.pdf",
-      desc: "Pelajari huruf hijaiyah dengan latihan membaca dan menulis.",
+      desc: "Huruf Arab disebut huruf Hijaiyah. Setiap huruf memiliki bentuk khas yang ketika
+            ditulis berdiri sendiri disebut isolat (terpisah). Nanti kita akan belajar bentuknya ketika disambung.",
     },
     {
       id: 2,
-      title: "Bab 2: Harakat",
+      title: "BAB 2: MENULIS KATA-KATA FAMILIAR",
       pdf: "/pdf/Konten_BBA2.pdf",
-      desc: "Pahami tanda harakat untuk bacaan panjang dan pendek.",
+      desc: "Pahami Kata-Kata yang familiar dalam bahasa Arab khususnya di bacaan Al Quran.",
+    },
+    {
+      id: 3,
+      title: "BAB 3: MELANGKAH KE AYAT AL-QURAN",
+      pdf: "/pdf/Konten_BBA3.pdf",
+      desc: "Pelajari Ayat Al Quran dengan latihan membaca dan menulis.",
+    },
+    {
+      id: 4,
+      title: "BAB 4: MENGUASAI SELURUH HURUF",
+      pdf: "/pdf/Konten_BBA4.pdf",
+      desc: "Kuasi Seluruh Huruf yang ada agar makin mahir dalam membaca maupun menulis Al Quran.",
+    },
+    {
+      id: 1,
+      title: "BAB 5: HUKUM TAJWID DASAR",
+      pdf: "/pdf/Konten_BBA5.pdf",
+      desc: "Pelajari Tajwid dari Hukum Nun maupun Hukum Mim.",
     },
   ];
 
