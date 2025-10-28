@@ -1,75 +1,117 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Document, Page, pdfjs } from "react-pdf";
 
-export default function Home() {
+// ✅ agar PDF bisa dirender di browser (wajib)
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+
+export default function Book() {
   const nav = useNavigate();
+  const [activeTab, setActiveTab] = useState("buku");
+  const [selectedChapter, setSelectedChapter] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [numPages, setNumPages] = useState(null);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    nav("/login");
+  const chapters = [
+    { id: 1, title: "Bab 1: Huruf Hijaiyah", file: "/pdf/Konten_BBA1.pdf", video: "https://www.youtube.com/embed/VIDEO_ID1" },
+    { id: 2, title: "Bab 2: Harakat", file: "/pdf/Konten_BBA2.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
+  ];
+
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+    setPageNumber(1);
   };
+
+  const nextPage = () => setPageNumber(p => Math.min(p + 1, numPages));
+  const prevPage = () => setPageNumber(p => Math.max(p - 1, 1));
 
   return (
     <div className="container">
-      {/* Header dengan tombol di kanan atas */}
-      {/* Tombol kanan atas */}
-      <div className="top-right-buttons">
-        <button className="profile-btn" onClick={() => nav("/profile")}>
-          Profile
-        </button>
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
+      <div className="wp-topbar">
+        <button className="wp-back-btn" onClick={() => nav("/")}>
+          ⬅️ Kembali ke Home
         </button>
       </div>
-      <div className="header">
-        <h1>📖 Belajar Qur'an Interaktif</h1>
-        <p>
-          Latihan mandiri: menulis & membaca Al-Qur'an dengan validasi otomatis
-        </p>
+
+      <h2 style={{ textAlign: "center", margin: "20px 0" }}>📚 Buku & Animasi</h2>
+
+      <div className="tab-buttons" style={{ textAlign: "center", marginBottom: "20px" }}>
+        <button onClick={() => setActiveTab("buku")} className={activeTab === "buku" ? "active" : ""}>Buku</button>
+        <button onClick={() => setActiveTab("animasi")} className={activeTab === "animasi" ? "active" : ""}>Animasi</button>
       </div>
 
-      <div className="card">
-        <h3>Selamat datang!</h3>
-        <p className="small">
-          Aplikasi ini membantu siswa belajar menulis huruf hijaiyah dan
-          berlatih membaca (tilawah). Pilih fitur di bawah untuk memulai.
-        </p>
-      </div>
+      {/* === TAB BUKU === */}
+      {activeTab === "buku" && (
+        <div className="chapter-list">
+          {!selectedChapter ? (
+            // 📖 Daftar Bab
+            chapters.map(ch => (
+              <div
+                key={ch.id}
+                className="chapter-card-konten"
+                style={{ cursor: "pointer" }}
+                onClick={() => setSelectedChapter(ch)}
+              >
+                <h3>{ch.title}</h3>
+                <p>Klik untuk membuka isi bab</p>
+              </div>
+            ))
+          ) : (
+            // 📄 Viewer PDF
+            <div className="pdf-viewer" style={{ textAlign: "center" }}>
+              <button
+                onClick={() => setSelectedChapter(null)}
+                style={{
+                  marginBottom: "10px",
+                  padding: "8px 16px",
+                  background: "#eee",
+                  borderRadius: "6px",
+                  cursor: "pointer"
+                }}
+              >
+                ⬅️ Kembali ke Daftar Bab
+              </button>
 
-      <div className="feature-grid">
-        <div className="feature" onClick={() => nav("/write")}>
-          <div>✍️</div>
-          <h4>Latihan Menulis</h4>
-          <p>Scan tulisan huruf / potongan ayat untuk validasi.</p>
+              <div style={{ margin: "10px 0" }}>
+                <Document
+                  file={selectedChapter.file}
+                  onLoadSuccess={onDocumentLoadSuccess}
+                  loading={<p>📥 Memuat buku...</p>}
+                >
+                  <Page pageNumber={pageNumber} renderTextLayer={false} renderAnnotationLayer={false} scale={1.2} />
+                </Document>
+                <p>
+                  Halaman {pageNumber} dari {numPages || "?"}
+                </p>
+                <div>
+                  <button onClick={prevPage} disabled={pageNumber <= 1}>⬅️ Sebelumnya</button>
+                  <button onClick={nextPage} disabled={pageNumber >= numPages} style={{ marginLeft: "10px" }}>Berikutnya ➡️</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
+      )}
 
-        <div className="feature" onClick={() => nav("/read")}>
-          <div>🔊</div>
-          <h4>Latihan Membaca</h4>
-          <p>Rekam bacaan ayat, sistem akan menilai pelafalan.</p>
+      {/* === TAB ANIMASI === */}
+      {activeTab === "animasi" && (
+        <div className="chapter-list">
+          {chapters.map(ch => (
+            <div key={ch.id} className="chapter-card-konten">
+              <h3>{ch.title}</h3>
+              <iframe
+                width="100%"
+                height="200"
+                src={ch.video}
+                title={ch.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          ))}
         </div>
-
-        <div className="feature" onClick={() => nav("/book")}>
-          <div>📚</div>
-          <h4>Buku & Animasi</h4>
-          <p>Baca teori dan lihat animasi belajar per bab.</p>
-        </div>
-        
-        <div className="feature" onClick={() => nav("/ask")}>
-          <div>💬</div>
-          <h4>Bertanya</h4>
-          <p>Tanyakan hal terkait pembelajaran Al-Qur’an dan bahasa Arab.</p>
-        </div>
-
-        <div
-          className="feature"
-          style={{ gridColumn: "1 / -1" }}
-          onClick={() => nav("/progress")}>
-        {/* <div className="feature" onClick={() => nav("/progress")}> */}
-          <h4>📊 Progress Saya</h4>
-          <p>Lihat perkembangan latihan menulis & membaca.</p>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
