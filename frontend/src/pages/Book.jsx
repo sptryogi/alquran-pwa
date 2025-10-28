@@ -65,7 +65,8 @@ export default function Book() {
                 style={{
                   marginBottom: "10px",
                   padding: "8px 16px",
-                  background: "#eee",
+                  background: "#007bff", // <-- GANTI JADI BIRU
+                  color: "white",        // <-- TAMBAHKAN INI (agar teks putih)
                   borderRadius: "6px",
                   cursor: "pointer"
                 }}
