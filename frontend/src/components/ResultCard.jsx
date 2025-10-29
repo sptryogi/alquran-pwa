@@ -1,6 +1,7 @@
 export default function ResultCard({ result }) {
   if (!result) return null;
   const isPass = result.score >= 75;
+  const isArabic = /[\u0600-\u06FF]/.test(result.feedback);
 
   // convert **text** → <b>text</b>
   const formatFeedback = (text) => {
@@ -42,8 +43,6 @@ export default function ResultCard({ result }) {
         <b>Saran:</b>
         {/* <p>{result.feedback}</p> */}
         {/* <p dangerouslySetInnerHTML={{ __html: result.feedback.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") }}></p> */}
-        const isArabic = /[\u0600-\u06FF]/.test(result.feedback);
-
         <p
           className={isArabic ? "arabic-text" : ""}
           dangerouslySetInnerHTML={{
