@@ -67,15 +67,31 @@ button:focus-visible {
   }
 }
 
+/* 1. Impor font (pastikan path ini benar) */
 @font-face {
   font-family: 'LPMQ IsepMisbah';
+  /* Path ini berarti file ada di: public/fonts/LPMQ_IsepMisbah.TTF */
   src: url('/fonts/LPMQ_IsepMisbah.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+
+  /* 2. INI KUNCINYA: 
+     Perintahkan browser HANYA menggunakan font ini untuk karakter Arab */
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
 }
 
-.arabic-text {
-  font-family: 'LPMQ IsepMisbah', 'Scheherazade', 'Amiri', serif;
-  font-size: 1.4em;
+/* 3. Ganti .arabic-text menjadi .arabic-mixin */
+/* Kelas ini aman untuk teks campuran (Indonesia + Arab) */
+.arabic-mixin {
+  /* 4. Terapkan LPMQ sebagai font PERTAMA. */
+  /* Browser akan pakai LPMQ untuk Arab, dan 'Arial/sans-serif' untuk Latin */
+  font-family: 'LPMQ IsepMisbah', Arial, 'Helvetica Neue', sans-serif;
+  
+  /* 5. Atur style umum di sini */
+  font-size: 1.3rem;   /* Sedikit perbesar agar harakat jelas */
   line-height: 1.8;
-  direction: rtl;
-  text-align: right;
+  
+  /* 6. PENTING: Hapus 'direction: rtl' dan 'text-align: right' */
+  /* Ini akan merusak tampilan paragraf campuran */
 }
