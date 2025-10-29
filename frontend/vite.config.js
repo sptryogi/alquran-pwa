@@ -16,5 +16,13 @@ export default defineConfig({
         background_color: "#ffffff"
       }
     })
-  ]
+  ],
+
+  build: {
+    rollupOptions: {
+      external: [
+        'pdfjs-dist/build/pdf.worker.entry' // <-- Ini mencegah Rollup mencoba mencari file di luar node_modules
+      ],
+    },
+  },
 });
