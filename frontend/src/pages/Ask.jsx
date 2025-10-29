@@ -115,12 +115,12 @@ export default function Ask() {
       </div>
 
       {answer && (() => {
-        const isArabic = /[\u0600-\u06FF]/.test(answer);
         return (
           <div className="answer-box" style={{ marginTop: "20px" }}>
             <h4>Jawaban:</h4>
             <p
-              className={isArabic ? "arabic-text" : ""}
+              // 2. GANTI className di sini
+              className="arabic-mixin" // <-- Terapkan kelas baru ini
               dangerouslySetInnerHTML={{
                 __html: answer.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
               }}
