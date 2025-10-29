@@ -66,3 +66,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@font-face {
+  font-family: 'LPMQ IsepMisbah';
+  src: url('/fonts/LPMQ_IsepMisbah.TTF') format('truetype');
+}
+
+.arabic-text {
+  font-family: 'LPMQ IsepMisbah', 'Scheherazade', 'Amiri', serif;
+  font-size: 1.4em;
+  line-height: 1.8;
+  direction: rtl;
+  text-align: right;
+}
