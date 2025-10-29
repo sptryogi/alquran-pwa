@@ -24,10 +24,12 @@ export default function ImageUpload({ onResult }) {
   return (
     <div className="wp-card">
       <h4>📷 Upload Gambar</h4>
-      <label className="wp-upload-btn">
-        Pilih File
-        <input type="file" accept="image/*" onChange={handleUpload} hidden />
-      </label>
+      {!loading && (
+        <label className="wp-upload-btn">
+          Pilih File
+          <input type="file" accept="image/*" onChange={handleUpload} hidden />
+        </label>
+      )}
       {fileName && <div className="wp-filename">File: {fileName}</div>}
       {loading && <div className="wp-loading">⏳ Memproses gambar...</div>}
     </div>
