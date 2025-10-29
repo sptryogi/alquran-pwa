@@ -41,8 +41,15 @@ export default function ResultCard({ result }) {
       <div className="wp-feedback">
         <b>Saran:</b>
         {/* <p>{result.feedback}</p> */}
-        {/* <p dangerouslySetInnerHTML={{ __html: formatFeedback(result.feedback) }} /> */}
-        <p dangerouslySetInnerHTML={{ __html: result.feedback.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") }}></p>
+        {/* <p dangerouslySetInnerHTML={{ __html: result.feedback.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") }}></p> */}
+        const isArabic = /[\u0600-\u06FF]/.test(result.feedback);
+
+        <p
+          className={isArabic ? "arabic-text" : ""}
+          dangerouslySetInnerHTML={{
+            __html: result.feedback.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
+          }}
+        ></p>
 
         {/* Audio Player */}
         <audio 
