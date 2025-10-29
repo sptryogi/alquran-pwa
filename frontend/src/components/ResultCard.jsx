@@ -40,8 +40,6 @@ export default function ResultCard({ result }) {
 
       <div className="wp-feedback">
         <b>Saran:</b>
-        {/* <p>{result.feedback}</p> */}
-        {/* <p dangerouslySetInnerHTML={{ __html: result.feedback.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") }}></p> */}
         <p
           // 2. GANTI className di sini
           className="arabic-mixin" // <-- Terapkan kelas baru ini
