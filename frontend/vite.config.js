@@ -17,12 +17,4 @@ export default defineConfig({
       }
     })
   ],
-
-  build: {
-    rollupOptions: {
-      external: [
-        'pdfjs-dist/build/pdf.worker.entry' // <-- Ini mencegah Rollup mencoba mencari file di luar node_modules
-      ],
-    },
-  },
 });
