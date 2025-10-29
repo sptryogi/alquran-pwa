@@ -47,18 +47,16 @@ export default function AudioRecorder({ onResult }) {
     <div className="readpractice-card recorder-card">
       <h4>🎙️ Rekam Bacaan</h4>
       <div className="recorder-actions">
-        {!recording ? (
-          <button
-            className="btn"
-            onClick={startRecording}
-            disabled={loading}
-          >
-            ▶ Mulai Rekam
-          </button>
-        ) : (
-          <button className="btn secondary" onClick={stopRecording}>
-            ⏹ Stop
-          </button>
+        {!loading && (
+          !recording ? (
+            <button className="btn" onClick={startRecording}>
+              ▶ Mulai Rekam
+            </button>
+          ) : (
+            <button className="btn secondary" onClick={stopRecording}>
+              ⏹ Stop
+            </button>
+          )
         )}
       </div>
       {loading && <div className="loading-text">⏳ Memproses audio...</div>}
