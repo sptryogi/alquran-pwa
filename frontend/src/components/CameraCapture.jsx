@@ -106,14 +106,16 @@ export default function CameraCapture({ onResult }) {
       {/* END NEW */}
       <canvas ref={canvasRef} style={{ display: "none" }} />
 
-      <div className="wp-btn-group camera-controls">
-        <button className="wp-btn primary" onClick={capture} disabled={loading}>
-          📸 Tangkap
-        </button>
-        <button className="wp-btn secondary" onClick={switchCamera}>
-          🔄 Ganti Kamera
-        </button>
-      </div>
+      {!loading && (
+        <div className="wp-btn-group camera-controls">
+          <button className="wp-btn primary" onClick={capture}>
+            📸 Tangkap
+          </button>
+          <button className="wp-btn secondary" onClick={switchCamera}>
+            🔄 Ganti Kamera
+          </button>
+        </div>
+      )}
 
       {loading && <div className="wp-loading">Mengirim & memeriksa...</div>}
     </div>
