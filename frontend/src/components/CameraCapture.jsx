@@ -90,31 +90,33 @@ export default function CameraCapture({ onResult }) {
     <div className="wp-card">
       <h4>📷 Kamera — Tangkap Tulisan</h4>
       {/* NEW: Container untuk overlay panduan */}
-      <div className="camera-viewport-container"> 
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
-          className="wp-video"
-        />
-        {/* NEW: Overlay Panduan (akan diatur di CSS) */}
-        <div className="cropping-guide-overlay">
-          <div className="cropping-line"></div>
-        </div>
-      </div>
-      {/* END NEW */}
-      <canvas ref={canvasRef} style={{ display: "none" }} />
-
       {!loading && (
-        <div className="wp-btn-group camera-controls">
-          <button className="wp-btn primary" onClick={capture}>
-            📸 Tangkap
-          </button>
-          <button className="wp-btn secondary" onClick={switchCamera}>
-            🔄 Ganti Kamera
-          </button>
-        </div>
+        <>
+          <div className="camera-viewport-container"> 
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className="wp-video"
+            />
+            {/* Overlay Panduan */}
+            <div className="cropping-guide-overlay">
+              <div className="cropping-line"></div>
+            </div>
+          </div>
+      
+          <canvas ref={canvasRef} style={{ display: "none" }} />
+      
+          <div className="wp-btn-group camera-controls">
+            <button className="wp-btn primary" onClick={capture}>
+              📸 Tangkap
+            </button>
+            <button className="wp-btn secondary" onClick={switchCamera}>
+              🔄 Ganti Kamera
+            </button>
+          </div>
+        </>
       )}
 
       {loading && <div className="wp-loading">Mengirim & memeriksa...</div>}
