@@ -16,9 +16,9 @@ export default function Book() {
   const [numPages, setNumPages] = useState(null);
 
   const chapters = [
-    { id: 1, title: "Bab 1: Huruf Hijaiyah", file: "/public/pdf/Konten_BBA1.pdf", video: "https://www.youtube.com/embed/VIDEO_ID1" },
-    { id: 2, title: "Bab 2: Harakat", file: "/public/pdf/Konten_BBA2.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
-  ];
+    { id: 1, title: "Bab 1: Huruf Hijaiyah", file: "/pdf/Konten_BBA1.pdf", video: "https://www.youtube.com/embed/VIDEO_ID1" },
+    { id: 2, title: "Bab 2: Harakat", file: "/pdf/Konten_BBA2.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
+  ];
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
