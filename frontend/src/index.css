@@ -79,6 +79,6 @@ button:focus-visible {
 
 .arabic-mixin {
   font-family: 'LPMQ IsepMisbah', Arial, 'Helvetica Neue', sans-serif;
-  font-size: 1.3rem;   /* Sedikit perbesar agar harakat jelas */
+  font-size: 1.3rem; 
   line-height: 1.8;
 }
