@@ -17,7 +17,10 @@ export default function Book() {
 
   const chapters = [
     { id: 1, title: "Bab 1: Huruf Hijaiyah", file: "/pdf/Konten_BBA1.pdf", video: "https://www.youtube.com/embed/VIDEO_ID1" },
-    { id: 2, title: "Bab 2: Harakat", file: "/pdf/Konten_BBA2.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
+    { id: 2, title: "Bab 2: Mencoba Latihan Baca dan Tulis", file: "/pdf/Konten_BBA2.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
+    { id: 3, title: "Bab 3: Mengenali Huruf Familiar", file: "/pdf/Konten_BBA3.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
+    { id: 4, title: "Bab 4: Menguasai Huruf Hijaiyah", file: "/pdf/Konten_BBA4.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
+    { id: 5, title: "Bab 5: Tajwid Dasar", file: "/pdf/Konten_BBA5.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
   ];
 
   const onDocumentLoadSuccess = ({ numPages }) => {
