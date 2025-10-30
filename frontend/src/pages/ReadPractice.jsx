@@ -36,7 +36,7 @@ export default function ReadPractice() {
       <div className="readpractice-card">
         <h3>Latihan Membaca (Tilawah)</h3>
         <p className="small">
-          Rekam bacaan dan dapatkan penilaian. Sistem menilai kemiripan teks hasil STT dengan teks target.
+          Rekam bacaan dan dapatkan penilaian. Sistem menilai kemiripan bacaan Anda dengan teks target.
         </p>
       </div>
 
