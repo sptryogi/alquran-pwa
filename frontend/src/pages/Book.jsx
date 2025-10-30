@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Deteksi perangkat mobile sederhana
+const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
 export default function Book() {
   const nav = useNavigate();
   const [activeTab, setActiveTab] = useState("buku");
   const [selectedChapter, setSelectedChapter] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
 
   const chapters = [
     { id: 1, title: "Bab 1: Huruf Hijaiyah", file: "/pdf/Konten_BBA1.pdf", video: "https://www.youtube.com/embed/VIDEO_ID1" },
@@ -15,58 +18,56 @@ export default function Book() {
     { id: 5, title: "Bab 5: Tajwid Dasar", file: "/pdf/Konten_BBA5.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
   ];
 
-  // ✅ Deteksi perangkat (mobile vs desktop)
-  useEffect(() => {
-    const checkMobile = window.innerWidth < 768;
-    setIsMobile(checkMobile);
-  }, []);
-
-  // ✅ Jika mobile & chapter dipilih, langsung buka PDF fullscreen
+  // Tampilkan alert jika di mobile
   useEffect(() => {
     if (isMobile && selectedChapter) {
-      window.location.href = selectedChapter.file;
+      alert("⚠️ Tampilan PDF mungkin tidak muncul di mode mobile.\nSilakan aktifkan Mode Desktop di browser Anda agar bisa membaca dengan benar.");
     }
-  }, [selectedChapter, isMobile]);
-
-  // 🔹 Fungsi untuk membuka fullscreen manual (desktop)
-  const openFullscreen = (file) => {
-    const viewer = document.createElement("iframe");
-    viewer.src = file;
-    viewer.style.position = "fixed";
-    viewer.style.top = "0";
-    viewer.style.left = "0";
-    viewer.style.width = "100vw";
-    viewer.style.height = "100vh";
-    viewer.style.zIndex = "9999";
-    viewer.style.border = "none";
-    viewer.style.backgroundColor = "white";
-
-    // Tombol tutup di fullscreen
-    const closeBtn = document.createElement("button");
-    closeBtn.innerText = "✖ Tutup";
-    closeBtn.style.position = "fixed";
-    closeBtn.style.top = "10px";
-    closeBtn.style.right = "10px";
-    closeBtn.style.padding = "10px 14px";
-    closeBtn.style.background = "#007bff";
-    closeBtn.style.color = "white";
-    closeBtn.style.border = "none";
-    closeBtn.style.borderRadius = "8px";
-    closeBtn.style.cursor = "pointer";
-    closeBtn.style.zIndex = "10000";
-
-    closeBtn.onclick = () => {
-      viewer.remove();
-      closeBtn.remove();
-    };
-
-    document.body.appendChild(viewer);
-    document.body.appendChild(closeBtn);
-  };
+  }, [selectedChapter]);
 
   return (
-    <div className="container">
-      {/* === TOP BAR === */}
+    <div className="container" style={{ position: "relative" }}>
+      {/* === FULLSCREEN VIEWER === */}
+      {fullscreen && selectedChapter && (
+        <div
+          className="fullscreen-viewer"
+          style={{
+            position: "fixed",
+            top: 0, left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "#000",
+            zIndex: 9999,
+          }}
+        >
+          <button
+            onClick={() => setFullscreen(false)}
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              zIndex: 10000,
+              background: "rgba(255,255,255,0.9)",
+              border: "none",
+              borderRadius: "6px",
+              padding: "8px 12px",
+              fontWeight: "bold",
+              cursor: "pointer"
+            }}
+          >
+            ❌ Tutup
+          </button>
+
+          <iframe
+            src={`https://drive.google.com/viewerng/viewer?embedded=true&url=${window.location.origin}${selectedChapter.file}`}
+            width="100%"
+            height="100%"
+            style={{ border: "none" }}
+          />
+        </div>
+      )}
+
+      {/* === HEADER === */}
       <div className="wp-topbar">
         <button className="wp-back-btn" onClick={() => nav("/")}>
           ⬅️ Kembali ke Home
@@ -77,49 +78,28 @@ export default function Book() {
 
       {/* === TAB BUTTONS === */}
       <div className="tab-buttons" style={{ textAlign: "center", marginBottom: "20px" }}>
-        <button
-          onClick={() => setActiveTab("buku")}
-          className={activeTab === "buku" ? "active" : ""}
-        >
-          Buku
-        </button>
-        <button
-          onClick={() => setActiveTab("animasi")}
-          className={activeTab === "animasi" ? "active" : ""}
-        >
-          Animasi
-        </button>
+        <button onClick={() => setActiveTab("buku")} className={activeTab === "buku" ? "active" : ""}>Buku</button>
+        <button onClick={() => setActiveTab("animasi")} className={activeTab === "animasi" ? "active" : ""}>Animasi</button>
       </div>
 
       {/* === TAB BUKU === */}
       {activeTab === "buku" && (
         <div className="chapter-list">
           {!selectedChapter ? (
-            // Daftar Bab
-            chapters.map((ch) => (
+            // 📖 Daftar Bab
+            chapters.map(ch => (
               <div
                 key={ch.id}
                 className="chapter-card-konten"
-                style={{
-                  cursor: "pointer",
-                  transition: "transform 0.2s, box-shadow 0.2s",
-                }}
+                style={{ cursor: "pointer" }}
                 onClick={() => setSelectedChapter(ch)}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = "scale(1.02)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
               >
                 <h3>{ch.title}</h3>
                 <p>Klik untuk membuka isi bab</p>
               </div>
             ))
           ) : (
-            // Viewer PDF untuk desktop
+            // 📄 PDF Viewer dalam halaman
             <div className="pdf-viewer" style={{ textAlign: "center" }}>
               <button
                 onClick={() => setSelectedChapter(null)}
@@ -129,30 +109,11 @@ export default function Book() {
                   background: "#007bff",
                   color: "white",
                   borderRadius: "6px",
-                  border: "none",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
               >
                 ⬅️ Kembali ke Daftar Bab
               </button>
-
-              {/* Fullscreen Button */}
-              {!isMobile && (
-                <button
-                  onClick={() => openFullscreen(selectedChapter.file)}
-                  style={{
-                    marginLeft: "10px",
-                    padding: "8px 16px",
-                    background: "#28a745",
-                    color: "white",
-                    borderRadius: "6px",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  ⛶ Buka Fullscreen
-                </button>
-              )}
 
               <div
                 style={{
@@ -162,7 +123,7 @@ export default function Book() {
                   border: "1px solid #ddd",
                   borderRadius: "8px",
                   overflow: "hidden",
-                  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                  boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
                 }}
               >
                 <iframe
@@ -172,6 +133,22 @@ export default function Book() {
                   style={{ border: "none" }}
                 />
               </div>
+
+              {/* Tombol Fullscreen */}
+              <button
+                onClick={() => setFullscreen(true)}
+                style={{
+                  marginTop: "12px",
+                  padding: "8px 14px",
+                  background: "linear-gradient(135deg, #28a745, #218838)",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
+                  cursor: "pointer"
+                }}
+              >
+                🔍 Buka Layar Penuh
+              </button>
             </div>
           )}
         </div>
@@ -180,7 +157,7 @@ export default function Book() {
       {/* === TAB ANIMASI === */}
       {activeTab === "animasi" && (
         <div className="chapter-list">
-          {chapters.map((ch) => (
+          {chapters.map(ch => (
             <div key={ch.id} className="chapter-card-konten">
               <h3>{ch.title}</h3>
               <iframe
@@ -191,10 +168,6 @@ export default function Book() {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                style={{
-                  borderRadius: "10px",
-                  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-                }}
               />
             </div>
           ))}
