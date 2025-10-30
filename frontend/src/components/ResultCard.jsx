@@ -1,12 +1,25 @@
+import React, { useEffect, useRef } from "react";
+
 export default function ResultCard({ result }) {
   if (!result) return null;
   const isPass = result.score >= 75;
+  const audioRef = useRef(null);
 
   // convert **text** → <b>text</b>
   const formatFeedback = (text) => {
     if (!text) return "";
     return text.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
   };
+
+  // otomatis play sekali setelah hasil baru muncul
+  useEffect(() => {
+    if (audioRef.current) {
+      // play otomatis (jika browser mengizinkan)
+      audioRef.current.play().catch(() => {
+        console.warn("Autoplay diblokir browser, user bisa tekan play manual.");
+      });
+    }
+  }, [result.feedback]); // hanya saat feedback berubah
 
   return (
     <div className="wp-card">
@@ -49,9 +62,11 @@ export default function ResultCard({ result }) {
         ></p>
 
         {/* Audio Player */}
-        <audio 
-          key={result.feedback} 
-          controls 
+        <audio
+          key={result.feedback}
+          ref={audioRef}
+          controls
+          autoPlay // <-- ini menandai auto play
           style={{ marginTop: "10px" }}
         >
           <source
