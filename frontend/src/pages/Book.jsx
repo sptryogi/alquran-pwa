@@ -166,7 +166,7 @@ export default function Book() {
                 }}
               >
                 <iframe
-                  src={`https://drive.google.com/viewerng/viewer?embedded=true&url=${window.location.origin}${selectedChapter.file}`}
+                  src={`https://mozilla.github.io/pdf.js/web/viewer.html?file=${window.location.origin}${selectedChapter.file}`}
                   width="100%"
                   height="100%"
                   style={{ border: "none" }}
