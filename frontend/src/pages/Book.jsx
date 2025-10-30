@@ -165,11 +165,11 @@ export default function Book() {
                   boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                 }}
               >
-                <embed
-                  src={selectedChapter.file}
-                  type="application/pdf"
+                <iframe
+                  src={`https://drive.google.com/viewerng/viewer?embedded=true&url=${window.location.origin}${selectedChapter.file}`}
                   width="100%"
                   height="100%"
+                  style={{ border: "none" }}
                 />
               </div>
             </div>
