@@ -37,7 +37,7 @@ export default function WritePractice() {
       <div className="wp-card">
         <h2 className="wp-title">✍️ Latihan Menulis Al-Qur'an</h2>
         <p className="wp-description">
-          Pilih mode di bawah untuk mulai berlatih. Kamu bisa mengunggah foto
+          Pilih mode di bawah untuk mulai berlatih. Anda bisa mengunggah foto
           tulisan atau langsung menggunakan kamera untuk validasi otomatis.
         </p>
 
