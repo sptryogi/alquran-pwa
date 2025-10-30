@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
   
@@ -10,8 +10,18 @@ export default function Ask() {
   const [recording, setRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const nav = useNavigate();
+  const audioRef = useRef(null); // 🔹 ref ke audio player
 
   const BACKEND_URL = "https://alquran-backend-941267709419.asia-southeast2.run.app";
+
+  // 🔊 Auto play audio setiap kali audioUrl berubah
+  useEffect(() => {
+    if (audioUrl && audioRef.current) {
+      audioRef.current.play().catch(() => {
+        console.warn("Autoplay diblokir oleh browser. User bisa tekan play manual.");
+      });
+    }
+  }, [audioUrl]);
 
   // 🔹 Fungsi untuk kirim pertanyaan ke AI
   const handleAsk = async (inputText) => {
@@ -126,7 +136,13 @@ export default function Ask() {
             ></p>
       
             {audioUrl && (
-              <audio controls style={{ marginTop: "10px" }}>
+              <audio
+                ref={audioRef}
+                key={audioUrl}
+                controls
+                autoPlay // 🔹 langsung play saat siap
+                style={{ marginTop: "10px" }}
+              >
                 <source src={audioUrl} type="audio/mpeg" />
                 Browser kamu tidak mendukung audio.
               </audio>
