@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Book() {
   const nav = useNavigate();
   const [activeTab, setActiveTab] = useState("buku");
   const [selectedChapter, setSelectedChapter] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const chapters = [
     { id: 1, title: "Bab 1: Huruf Hijaiyah", file: "/pdf/Konten_BBA1.pdf", video: "https://www.youtube.com/embed/VIDEO_ID1" },
@@ -13,6 +14,55 @@ export default function Book() {
     { id: 4, title: "Bab 4: Menguasai Huruf Hijaiyah", file: "/pdf/Konten_BBA4.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
     { id: 5, title: "Bab 5: Tajwid Dasar", file: "/pdf/Konten_BBA5.pdf", video: "https://www.youtube.com/embed/VIDEO_ID2" },
   ];
+
+  // ✅ Deteksi perangkat (mobile vs desktop)
+  useEffect(() => {
+    const checkMobile = window.innerWidth < 768;
+    setIsMobile(checkMobile);
+  }, []);
+
+  // ✅ Jika mobile & chapter dipilih, langsung buka PDF fullscreen
+  useEffect(() => {
+    if (isMobile && selectedChapter) {
+      window.location.href = selectedChapter.file;
+    }
+  }, [selectedChapter, isMobile]);
+
+  // 🔹 Fungsi untuk membuka fullscreen manual (desktop)
+  const openFullscreen = (file) => {
+    const viewer = document.createElement("iframe");
+    viewer.src = file;
+    viewer.style.position = "fixed";
+    viewer.style.top = "0";
+    viewer.style.left = "0";
+    viewer.style.width = "100vw";
+    viewer.style.height = "100vh";
+    viewer.style.zIndex = "9999";
+    viewer.style.border = "none";
+    viewer.style.backgroundColor = "white";
+
+    // Tombol tutup di fullscreen
+    const closeBtn = document.createElement("button");
+    closeBtn.innerText = "✖ Tutup";
+    closeBtn.style.position = "fixed";
+    closeBtn.style.top = "10px";
+    closeBtn.style.right = "10px";
+    closeBtn.style.padding = "10px 14px";
+    closeBtn.style.background = "#007bff";
+    closeBtn.style.color = "white";
+    closeBtn.style.border = "none";
+    closeBtn.style.borderRadius = "8px";
+    closeBtn.style.cursor = "pointer";
+    closeBtn.style.zIndex = "10000";
+
+    closeBtn.onclick = () => {
+      viewer.remove();
+      closeBtn.remove();
+    };
+
+    document.body.appendChild(viewer);
+    document.body.appendChild(closeBtn);
+  };
 
   return (
     <div className="container">
@@ -69,7 +119,7 @@ export default function Book() {
               </div>
             ))
           ) : (
-            // Viewer PDF pakai embed
+            // Viewer PDF untuk desktop
             <div className="pdf-viewer" style={{ textAlign: "center" }}>
               <button
                 onClick={() => setSelectedChapter(null)}
@@ -81,13 +131,28 @@ export default function Book() {
                   borderRadius: "6px",
                   border: "none",
                   cursor: "pointer",
-                  transition: "background 0.3s",
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.background = "#0056b3")}
-                onMouseOut={(e) => (e.currentTarget.style.background = "#007bff")}
               >
                 ⬅️ Kembali ke Daftar Bab
               </button>
+
+              {/* Fullscreen Button */}
+              {!isMobile && (
+                <button
+                  onClick={() => openFullscreen(selectedChapter.file)}
+                  style={{
+                    marginLeft: "10px",
+                    padding: "8px 16px",
+                    background: "#28a745",
+                    color: "white",
+                    borderRadius: "6px",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  ⛶ Buka Fullscreen
+                </button>
+              )}
 
               <div
                 style={{
