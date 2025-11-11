@@ -5,6 +5,7 @@ const API = "https://alquran-backend-941267709419.asia-southeast2.run.app"
 export async function uploadImage(file) {
   const fd = new FormData();
   fd.append("file", file);
+  fd.append("level", localStorage.getItem("level") || "standar"); // ✅ tambah ini
   // target_text optionally can be passed via form; for MVP backend uses default target
   const resp = await fetch(`${API}/scan-tulisan`, {
     method: "POST",
@@ -18,6 +19,8 @@ export async function uploadImage(file) {
 export async function uploadAudio(file) {
   const fd = new FormData();
   fd.append("file", file);
+  fd.append("level", localStorage.getItem("level") || "standar"); // ✅ tambah ini
+
   const resp = await fetch(`${API}/scan-audio`, {
     method: "POST",
     body: fd
