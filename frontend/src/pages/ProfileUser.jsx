@@ -35,6 +35,22 @@ export default function ProfileUser() {
           <b>Umur:</b> {user.age} tahun
         </p>
 
+        <div style={{ marginTop: "20px" }}>
+          <label><b>Tingkat Toleransi:</b></label>
+          <select
+            value={localStorage.getItem("level") || "standar"}
+            onChange={(e) => {
+              localStorage.setItem("level", e.target.value);
+              alert(`Level diset ke ${e.target.value}`);
+            }}
+            style={{ marginLeft: "10px" }}
+          >
+            <option value="pemula">Pemula (60)</option>
+            <option value="standar">Standar (70)</option>
+            <option value="intermediate">Intermediate (80)</option>
+          </select>
+        </div>
+
         <button className="back-btn" onClick={() => nav("/")}>
           ⬅️ Kembali
         </button>
