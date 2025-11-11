@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function ProfileUser() {
   const [user, setUser] = useState(null);
+  const [level, setLevel] = useState(localStorage.getItem("level") || "standar"); // ✅ state baru
   const nav = useNavigate();
 
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
     if (savedUser) {
-      // Ambil metadata dari Supabase (nama & umur disimpan saat register)
       setUser({
         name: savedUser.user_metadata?.fullname || "Pengguna",
         email: savedUser.email,
@@ -18,6 +18,13 @@ export default function ProfileUser() {
       nav("/login");
     }
   }, [nav]);
+
+  // 🔹 Jika user ubah dropdown
+  const handleLevelChange = (e) => {
+    const newLevel = e.target.value;
+    setLevel(newLevel); // update state
+    localStorage.setItem("level", newLevel); // simpan ke localStorage
+  };
 
   if (!user) return null;
 
@@ -35,14 +42,12 @@ export default function ProfileUser() {
           <b>Umur:</b> {user.age} tahun
         </p>
 
+        {/* 🔹 Dropdown Toleransi */}
         <div style={{ marginTop: "20px" }}>
           <label><b>Tingkat Toleransi:</b></label>
           <select
-            value={localStorage.getItem("level") || "standar"}
-            onChange={(e) => {
-              localStorage.setItem("level", e.target.value);
-              alert(`Level diset ke ${e.target.value}`);
-            }}
+            value={level}
+            onChange={handleLevelChange}
             style={{ marginLeft: "10px" }}
           >
             <option value="pemula">Pemula (60)</option>
