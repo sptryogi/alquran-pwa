@@ -8,6 +8,7 @@ export default function Ask() {
   const [audioUrl, setAudioUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [recording, setRecording] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const nav = useNavigate();
   const audioRef = useRef(null); // 🔹 ref ke audio player
@@ -29,6 +30,7 @@ export default function Ask() {
     if (!finalQuestion.trim()) return;
 
     setLoading(true);
+    setProcessing(true); // 🔹 tampilkan animasi proses
     try {
       const res = await axios.post(`${BACKEND_URL}/ask`, { question: finalQuestion });
       const aiAnswer = res.data.answer || "Tidak ada jawaban.";
@@ -39,9 +41,12 @@ export default function Ask() {
       const ttsUrl = `${BACKEND_URL}/feedback-tts?feedback=${encodeURIComponent(aiAnswer)}`;
       setAudioUrl(ttsUrl);
     } catch (err) {
-      setAnswer("❌ Gagal mendapatkan jawaban. Coba lagi nanti.");
+      console.error(err);
+      setAnswer(""); // kosongkan jawaban
+      alert("⚠️ Terjadi kesalahan saat memproses jawaban. Coba lagi nanti.");
     }
     setLoading(false);
+    setProcessing(false); // 🔹 sembunyikan animasi proses
   };
 
   // 🎙️ Rekam suara & kirim ke STT
@@ -106,23 +111,29 @@ export default function Ask() {
         onChange={(e) => setQuestion(e.target.value)}
       />
 
-      <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-        <button onClick={() => handleAsk()} disabled={loading}>
-          {loading ? "Mengirim..." : "Kirim Pertanyaan"}
-        </button>
-        <button
-          onClick={handleRecord}
-          style={{
-            backgroundColor: recording ? "#e74c3c" : "#2ecc71",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            padding: "8px 14px",
-          }}
-        >
-          {recording ? "⏹️ Stop" : "🎤 Rekam"}
-        </button>
-      </div>
+      {!processing ? (
+        <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+          <button onClick={() => handleAsk()} disabled={loading}>
+            {loading ? "Mengirim..." : "Kirim Pertanyaan"}
+          </button>
+          <button
+            onClick={handleRecord}
+            style={{
+              backgroundColor: recording ? "#e74c3c" : "#2ecc71",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              padding: "8px 14px",
+            }}
+          >
+            {recording ? "⏹️ Stop" : "🎤 Rekam"}
+          </button>
+        </div>
+      ) : (
+        <div style={{ textAlign: "center", marginTop: "20px", fontStyle: "italic" }}>
+          <p>⏳ Sedang memproses jawaban...</p>
+        </div>
+      )}
 
       {answer && (() => {
         return (
