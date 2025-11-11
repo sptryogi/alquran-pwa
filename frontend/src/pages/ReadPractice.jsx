@@ -15,7 +15,11 @@ export default function ReadPractice() {
   const handleResult = async (res) => {
     setResult(res);
     try {
-      await saveProgress({ type: "read", score: res.score });
+      await saveProgress({
+        type: "read",
+        score: res.score,
+        level: localStorage.getItem("level") || "standar"
+      });
     } catch (e) {
       console.warn("save progress failed", e);
     }
