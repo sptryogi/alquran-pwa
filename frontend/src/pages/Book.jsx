@@ -21,7 +21,7 @@ export default function Book() {
   // Tampilkan alert jika di mobile
   useEffect(() => {
     if (isMobile && selectedChapter) {
-      alert("⚠️ Tampilan PDF mungkin tidak muncul di mode mobile.\nSilakan aktifkan Mode Desktop di browser Anda agar bisa membaca dengan benar.");
+      alert("⚠️ Tampilan PDF mungkin tidak muncul di mode mobile.\nJika tidak muncul, Silakan aktifkan Mode Desktop di browser Anda agar bisa membaca dengan benar.");
     }
   }, [selectedChapter]);
 
